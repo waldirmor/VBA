@@ -14,10 +14,10 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 
 Dim ultimodado As Long
-Function AbrirArquivoDados() As Workbook          ' abertura do banco de dados
+Function AbrirArquivoDados() As Workbook    'comentario para abertura de arquivo
     Dim wb As Workbook
     Dim filePath As String
-    filePath = "C:\temp\bancoDados.xlsx" ' Atualize com o caminho correto
+    filePath = "C:\temp\bancoDados.xlsx"    ' Atualize com o caminho correto
     
     On Error Resume Next
     Set wb = Workbooks.Open(filePath)
@@ -64,15 +64,15 @@ Private Sub BTAlterarRegistro_Click()
         Exit Sub
     End If
     
-    ' Verifica se o ID inserido ï¿½ um nï¿½mero
+    ' Verifica se o ID inserido é um número
     If Not IsNumeric(Me.TextBoxIDP.Value) Then
-        MsgBox "O ID deve ser um nï¿½mero!"
+        MsgBox "O ID deve ser um número!"
         Exit Sub
     End If
     
     valor = CLng(Me.TextBoxIDP.Value)
     
-    ' Confirma se o usuï¿½rio deseja alterar o cadastro
+    ' Confirma se o usuário deseja alterar o cadastro
     resposta = MsgBox("Deseja alterar o cadastro de ID " & valor & "?", vbYesNo)
     
     If resposta = vbNo Then
@@ -86,7 +86,7 @@ Private Sub BTAlterarRegistro_Click()
         
         ' Verifica se encontrou o valor
         If fila Is Nothing Then
-            MsgBox "ID nï¿½o encontrado!"
+            MsgBox "ID não encontrado!"
             Exit Sub
         End If
         
@@ -174,7 +174,7 @@ Private Sub BTAlterarRegistro_Click()
         ' Reseta o ListBox
         ListBox_2.ListIndex = -1
         
-        ' Mensagem de confirmaï¿½ï¿½o
+        ' Mensagem de confirmação
         MsgBox "Cadastro Alterado com sucesso!"
     End If
 
@@ -189,24 +189,24 @@ Private Sub BTBuscaCEP_Click()
     Dim Complemento As String
     Dim Cidade As String
     
-    ' Verifica se o campo de CEP nï¿½o estï¿½ vazio
+    ' Verifica se o campo de CEP não está vazio
     If Me.TextBoxCEP.Value = "" Then
-        MsgBox "Por favor, insira um CEP vï¿½lido.", vbExclamation
+        MsgBox "Por favor, insira um CEP válido.", vbExclamation
         Exit Sub
     End If
     
     CEP = Me.TextBoxCEP.Value
     
-    ' Chama a funï¿½ï¿½o de busca do CEP
+    ' Chama a função de busca do CEP
     Call BuscaCEP(CEP, Rua, Bairro, Uf, Complemento, Cidade)
     
     ' Verifica se a busca foi bem-sucedida (se os valores foram preenchidos)
     If Rua = "" And Bairro = "" And Uf = "" And Cidade = "" Then
-        MsgBox "CEP nï¿½o encontrado. Verifique o CEP informado.", vbExclamation
+        MsgBox "CEP não encontrado. Verifique o CEP informado.", vbExclamation
         Exit Sub
     End If
     
-    ' Atualiza os campos do formulï¿½rio com os valores obtidos
+    ' Atualiza os campos do formulário com os valores obtidos
     Me.TextBoxRua.Value = Rua
     Me.TextBoxBairro.Value = Bairro
     Me.TextBoxCidade.Value = Cidade
@@ -224,9 +224,9 @@ End Sub
     Dim ws As Worksheet
     Dim registroEncontrado As Boolean
     
-    ' Verificar se o TextBoxIDP estï¿½ vazio
+    ' Verificar se o TextBoxIDP está vazio
     If Me.TextBoxIDP.Value = "" Then
-        MsgBox "Selecione um Cadastro antes de prosseguir com a exclusï¿½o!"
+        MsgBox "Selecione um Cadastro antes de prosseguir com a exclusão!"
         Exit Sub
     End If
     
@@ -244,9 +244,9 @@ End Sub
     ' Verificar se a resposta foi sim
     If resposta = vbYes Then
         With Me.ListBox_2
-            registroEncontrado = False ' Inicializa como nï¿½o encontrado
+            registroEncontrado = False ' Inicializa como não encontrado
             
-            ' Percorrer os itens da ListBox de trï¿½s para frente
+            ' Percorrer os itens da ListBox de trás para frente
             For i = .ListCount - 1 To 0 Step -1
                 If .Selected(i) Then
                     ' Procurar a linha correspondente na coluna A
@@ -306,15 +306,15 @@ End Sub
                         Me.TextBoxCata.Value = ""
                         Me.TextBoxObservacoes.Value = ""
                         
-                        MsgBox "Registro excluï¿½do com sucesso!"
-                        Exit For ' Sai do loop apï¿½s excluir o registro
+                        MsgBox "Registro excluído com sucesso!"
+                        Exit For ' Sai do loop após excluir o registro
                     End If
                 End If
             Next i
             
-            ' Exibe uma mensagem caso o registro nï¿½o tenha sido encontrado
+            ' Exibe uma mensagem caso o registro não tenha sido encontrado
             If Not registroEncontrado Then
-                MsgBox "Registro nï¿½o encontrado na planilha!"
+                MsgBox "Registro não encontrado na planilha!"
             End If
         End With
     End If
@@ -380,7 +380,7 @@ Private Sub BTInserirNovol_Click()
     Me.TextBoxCata.Value = ""
     Me.TextBoxObservacoes.Value = ""
     
-    ' Definir o prï¿½ximo ID automaticamente com base no maior valor da coluna A
+    ' Definir o próximo ID automaticamente com base no maior valor da coluna A
     
     Me.TextBoxIDP.Value = ws.Range("Z1").Value
     Me.TextBoxIDAmostra.Value = ws.Range("Z1").Value
@@ -552,13 +552,13 @@ If Not colunaID Is Nothing Then
 
     linhaAmostra = colunaID.Row
 Else
-    MsgBox "ID nï¿½o encontrado. Verifique o ID inserido.", vbExclamation, "Erro"
+    MsgBox "ID não encontrado. Verifique o ID inserido.", vbExclamation, "Erro"
     Exit Sub
 End If
 
 
 colunasDefeitos = Array("Preto", "Preto Verde", "Ardido", "Verde", "Quebrado", "Mau Granado / Chocho", "Brocado Limpo", "Brocado Sujo", "Coco", "Marinheiro", "Casca Gd", _
-"Casca Md ou Pq", "Fragmentos de Casca", "Pau/Pedra/Torrï¿½o Gd", "Pau/Pedra/Torrï¿½o Md", "Pau/Pedra/Torrï¿½o Pq")
+"Casca Md ou Pq", "Fragmentos de Casca", "Pau/Pedra/Torrão Gd", "Pau/Pedra/Torrão Md", "Pau/Pedra/Torrão Pq")
 
 
 defeito = Me.ComboBoxDefeitos.Value
@@ -574,7 +574,7 @@ For i = LBound(colunasDefeitos) To UBound(colunasDefeitos)
 Next i
 
 If i > UBound(colunasDefeitos) Then
-    MsgBox "Defeito nï¿½o reconhecido. Verifique o valor selecionado.", vbExclamation, "Erro"
+    MsgBox "Defeito não reconhecido. Verifique o valor selecionado.", vbExclamation, "Erro"
     Exit Sub
 End If
 
@@ -614,7 +614,7 @@ Private Sub BTSalvarNovo_Click()
     
     If Me.TextBoxIDP.Value <> Me.TextBoxIDAmostra.Value Then
     
-        MsgBox "Os ID nï¿½o correspondem!", vbExclamation
+        MsgBox "Os ID não correspondem!", vbExclamation
         
         Exit Sub
         
@@ -724,7 +724,7 @@ Private Sub BTSalvarNovo_Click()
    
     
     
-    MsgBox "Cadastro Concluï¿½do com Sucesso!"
+    MsgBox "Cadastro Concluído com Sucesso!"
 
 
 End Sub
@@ -810,7 +810,7 @@ Private Sub ListBox_2_Click()
     ws.Range("B9").Value = Data_abertura
     ws.Range("E9").Value = Data_fechamento
     ws.Range("B7").Value = Email
-    ws.Range("B8").Value = Endereï¿½o
+    ws.Range("B8").Value = Endereço
     ws.Range("E8").Value = N
     ws.Range("L9").Value = Estado
     
@@ -1054,14 +1054,14 @@ Private Sub TextBoxIDP_Change()
         Me.TextBoxDefeitos.Value = Application.WorksheetFunction.VLookup(codigo, Sheets("DADOS").Range("A:BF"), 51, 0)
     Case "Fragmentos de Casca"
         Me.TextBoxDefeitos.Value = Application.WorksheetFunction.VLookup(codigo, Sheets("DADOS").Range("A:BF"), 52, 0)
-    Case "Pau/Pedra/Torrï¿½o Gd"
+    Case "Pau/Pedra/Torrão Gd"
         Me.TextBoxDefeitos.Value = Application.WorksheetFunction.VLookup(codigo, Sheets("DADOS").Range("A:BF"), 53, 0)
-    Case "Pau/Pedra/Torrï¿½o Md"
+    Case "Pau/Pedra/Torrão Md"
         Me.TextBoxDefeitos.Value = Application.WorksheetFunction.VLookup(codigo, Sheets("DADOS").Range("A:BF"), 54, 0)
-    Case "Pau/Pedra/Torrï¿½o Pq"
+    Case "Pau/Pedra/Torrão Pq"
         Me.TextBoxDefeitos.Value = Application.WorksheetFunction.VLookup(codigo, Sheets("DADOS").Range("A:BF"), 55, 0)
     Case Else
-        MsgBox "Defeito selecionado nï¿½o ï¿½ vï¿½lido!"
+        MsgBox "Defeito selecionado não é válido!"
     End Select
     
 End Sub
@@ -1093,7 +1093,7 @@ Private Sub UserForm_Activate()
     
 
     
-    Me.ListBox_2.RowSource = "DADOS!Produtor"  'comentario teste
+    Me.ListBox_2.RowSource = "DADOS!Produtor"  'comentario teste 2
     Me.ListBox_2.ColumnCount = 55
     Me.ListBox_2.ColumnHeads = True
     Me.ListBox_2.ColumnWidths = "30;170;0;150;85;0;70;0;0;0;0;0;0;0;0;0;40;50;30;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0"
